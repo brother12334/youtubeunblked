@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexadecimal Redirect</title>
+    <style>
+        /* Make the iframe take up the entire screen */
+        html, body, iframe {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        // Function to convert a string to hexadecimal encoding
+        function stringToHex(str) {
+            let hex = '';
+            for (let i = 0; i < str.length; i++) {
+                hex += '\\x' + str.charCodeAt(i).toString(16);
+            }
+            return hex;
+        }
+
+        // Function to apply hex-encoded redirects to all links
+        function applyHexEncodingToLinks() {
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                const hexEncodedUrl = stringToHex(link.href);  // Encode the href to hex
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();  // Prevent default behavior
+                    const decodedUrl = decodeURIComponent(hexEncodedUrl);  // Decode hex and redirect
+                    window.location.href = decodedUrl;
+                });
+            });
+        }
+
+        window.onload = function() {
+            // Apply hexadecimal encoding to all links in the page
+            applyHexEncodingToLinks();
+        };
+    </script>
+</head>
+<body>
+    <!-- Embed the URL directly using an iframe -->
+    <iframe src="https://www.youtubeunblocked.live/" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+
+    <!-- Sample links that will be encoded in hexadecimal -->
+    <a href="https://example.com">Link 1</a>
+    <a href="https://anotherlink.com">Link 2</a>
+</body>
+</html>
